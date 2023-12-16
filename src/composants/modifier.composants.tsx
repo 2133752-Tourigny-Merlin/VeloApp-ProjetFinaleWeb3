@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Grid, Typography, TextField, Button } from '@mui/material';
+import { FormattedMessage } from 'react-intl';
+import { useNavigate } from 'react-router-dom';
 
 const Modifier = () => {
   const { id } = useParams();
-  const [veloData, setVeloData] = useState({
+  const navigate = useNavigate();
+  const [veloInfo, setVeloInfo] = useState({
     _id: id,
     marque: '',
     modele: '',
@@ -23,7 +26,7 @@ const Modifier = () => {
   useEffect(() => {
     axios.get(`https://master--adorable-panda-985249.netlify.app/velo/${id}`)
       .then((response) => {
-        setVeloData(response.data.Velo);
+        setVeloInfo(response.data.Velo);
       })
       .catch((error) => {
         console.error('Error fetching bike data:', error);
@@ -41,16 +44,15 @@ const Modifier = () => {
                            value;
     //Fin du code emprunté
   
-    setVeloData((prevData) => ({
-      ...prevData,
+    setVeloInfo((prevInfo) => ({
+      ...prevInfo,
       [name]: formattedValue,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission, e.g., send data to the server
-    axios.put(`https://master--adorable-panda-985249.netlify.app/velo`, { Velo: veloData })
+    axios.put(`https://master--adorable-panda-985249.netlify.app/velo`, { Velo: veloInfo })
       .then((response) => {
         console.log('Bike data updated successfully:', response.data);
       })
@@ -59,68 +61,73 @@ const Modifier = () => {
       });
   };
 
+  const handleBackClick = () => {
+    navigate('/');
+  };
+
   return (
+    <>
+    <FormattedMessage id="info.buttonRetour">{txt => <button onClick={handleBackClick}>{txt}</button>}</FormattedMessage>
     <Grid container direction="column" spacing={2}>
       <Grid item>
-        <Typography variant="h4">Modifier le vélo</Typography>
+        <FormattedMessage id="modifier.titre">{txt => <Typography variant="h4">{txt}</Typography>}</FormattedMessage>
       </Grid>
       <Grid item>
         <form onSubmit={handleSubmit}>
           <Grid container direction="column" spacing={2}>
             <Grid item>
-              <TextField
+            <FormattedMessage id="info.marque">{txt => <TextField
                 type="text"
                 name="marque"
-                label="Marque"
-                value={veloData.marque}
+                label={txt}
+                value={veloInfo.marque}
                 onChange={handleChange}
-              />
+              />}</FormattedMessage>
             </Grid>
             <Grid item>
-              <TextField
+            <FormattedMessage id="info.modele">{txt => <TextField
                 type="text"
                 name="modele"
-                label="Modele"
-                value={veloData.modele}
+                label={txt}
+                value={veloInfo.modele}
                 onChange={handleChange}
-              />
+              />}</FormattedMessage>
             </Grid>
             <Grid item>
-              <TextField
+            <FormattedMessage id="info.prix">{txt => <TextField
                 type="number"
                 name="prix"
-                label="Prix"
-                value={veloData.prix}
+                label={txt}
+                value={veloInfo.prix}
                 onChange={handleChange}
-              />
+              />}</FormattedMessage>
             </Grid>
             <Grid item>
-              <TextField
+            <FormattedMessage id="info.date">{txt => <TextField
                 type="date"
                 name="dateDeCreation"
-                label="Date"
-                value={veloData.dateDeCreation}
+                label={txt}
+                value={veloInfo.dateDeCreation}
                 onChange={handleChange}
-              />
+              />}</FormattedMessage>
             </Grid>
             <Grid item>
-              <TextField
+            <FormattedMessage id="info.couleur">{txt => <TextField
                 type="text"
                 name="couleurs"
-                label="Couleur example (Noire, Rouge)"
-                value={veloData.couleurs.join(', ')}
+                label={txt}
+                value={veloInfo.couleurs.join(', ')}
                 onChange={handleChange}
-              />
+              />}</FormattedMessage>
             </Grid>
             <Grid item>
-              <Button type="submit" variant="contained" color="primary">
-                Update Bike
-              </Button>
+              <FormattedMessage id="modifier.buttonSoummettre">{txt => <Button type="submit" variant="contained" color="primary">{txt}</Button>}</FormattedMessage>
             </Grid>
           </Grid>
         </form>
       </Grid>
     </Grid>
+    </>
   );
 };
 

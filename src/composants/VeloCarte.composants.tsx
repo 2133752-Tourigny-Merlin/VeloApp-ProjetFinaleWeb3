@@ -3,6 +3,7 @@ import { Card, CardMedia, Grid, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 interface IVelo {
   modele: string;
@@ -10,7 +11,7 @@ interface IVelo {
   annee: number;
   taille: string;
   type: string;
-  _id: string; // Add the _id field for uniquely identifying the bike
+  _id: string;
 }
 
 const typeVelo = ["Route", "Montagne monté", "Montagne descente", "Ville", "Bmx"];
@@ -36,11 +37,10 @@ const Velo = (props: IVelo) => {
   const navigate = useNavigate();
 
   const handleDelete = async () => {
-    const shouldDelete = window.confirm("Are you sure you want to delete this bike?");
+    const confirmation = window.confirm("Etes-vous certain de vouloir supprimer ce vélo?");
     
-    if (shouldDelete) {
+    if (confirmation) {
       try {
-        // Send the delete request to the API
         await axios.delete(`https://master--adorable-panda-985249.netlify.app/velo/${props._id}`);
         window.location.reload();
       } catch (error) {
@@ -69,21 +69,15 @@ const Velo = (props: IVelo) => {
     }}>
       <Grid container>
         <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <button style={{ backgroundColor: 'white', color: 'black' }} onClick={handleDelete}>
-            Supprimer
-          </button>
-          <button style={{ backgroundColor: 'white', color: 'black' }} onClick={handleUpdate}>
-            Modifier
-          </button>
-          <button style={{ backgroundColor: 'white', color: 'black' }} onClick={handleInfo}>
-            Voir plus
-          </button>
+        <FormattedMessage id="velo.buttonSupprimer">{txt => <button style={{ backgroundColor: 'white', color: 'black' }} onClick={handleDelete}>{txt}</button>}</FormattedMessage>
+        <FormattedMessage id="velo.buttonModifier">{txt => <button style={{ backgroundColor: 'white', color: 'black' }} onClick={handleUpdate}>{txt}</button>}</FormattedMessage>
+        <FormattedMessage id="velo.buttonVoirPlus">{txt => <button style={{ backgroundColor: 'white', color: 'black' }} onClick={handleInfo}>{txt}</button>}</FormattedMessage>
         </Grid>
         <Grid item xs={4} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <Typography variant="h5">{props.marque}</Typography>
           <Typography variant="h6">{props.modele}</Typography>
-          <Typography variant="body2">Taille: {props.taille}</Typography>
-          <Typography variant="body2">Année de fabrication: {props.annee}</Typography>
+          <Typography variant="body2"><FormattedMessage id="velo.taille"></FormattedMessage><FormattedMessage id={`app.grandeur${props.taille}`}></FormattedMessage></Typography>
+          <Typography variant="body2"><FormattedMessage id="velo.dateFabrication"></FormattedMessage>{props.annee}</Typography>
         </Grid>
         <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
           <CardMedia

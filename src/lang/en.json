@@ -1,3 +1,57 @@
 {
-    "app.titre": "Bike manager"
+    "app.titre": "Bike manager",
+    "app.prixMoyen": "Average price: ",
+    "app.couleurPopulaire": "Popular color: ",
+    "app.buttonAjouter": "Add",
+    "app.buttonDeconnection": "Disconnect",
+    "app.buttonLangue": "Change language",
+    "app.confirmationSuppression": "Are you sure you want to delete this bike ?",
+    "app.type": "Type",
+    "app.typeRoute": "Road",
+    "app.typeVille": "City",
+    "app.typeBmx": "Bmx",
+    "app.typeMontagne monté": "Montain ascension",
+    "app.typeMontagne descente": "Montain descent",
+
+    "app.grandeur": "Scale",
+    "app.grandeurTP": "XS",
+    "app.grandeurP": "S",
+    "app.grandeurM": "M",
+    "app.grandeurL": "L",
+    "app.grandeurTL": "XL",
+
+    "app.toutVelos": "All bikes",
+
+    "velo.buttonModifier": "Update",
+    "velo.buttonSupprimer": "Delete",
+    "velo.buttonVoirPlus": "See more",
+    "velo.dateFabrication": "Fabrication date: ",
+    "velo.taille": "Size: ",
+    
+
+    "info.marque": "Brand: ",
+    "info.modele": "Model: ",
+    "info.prix": "Price: ",
+    "info.date": "Date",
+    "info.fonctionnel": "Fonctional: ",
+    "info.couleurs": "Colors: ",
+    "info.vitesse": "Number of geers: ",
+    "info.roues": "Wheels: ",
+    "info.suspensions": "Suspension: ",
+    "info.tubeless": "Tubeless: ",
+    "info.psiMin": "Psi min: ",
+    "info.psiMax": "Psi max: ",
+    "info.buttonRetour": "Back",
+    "info.oui": "yes",
+    "info.non": "no",
+
+    "modifier.titre": "Update bike",
+    "modifier.buttonSoummettre": "Update",
+
+    "ajouter.buttonSoummettre": "Submit",
+    "ajouter.info": "Bike information",
+    "ajouter.roueAvant": "Front wheel",
+    "ajouter.roueArriere": "Back wheel",
+    "ajouter.suspensionAvant": "Front suspension",
+    "ajouter.suspensionArriere": "Back suspension"
 }

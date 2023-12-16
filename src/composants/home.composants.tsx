@@ -8,6 +8,7 @@ import './style.css'
 import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Grid, Paper, Typography, Box } from '@mui/material';
 import { logout } from '../firebase';
 import axios from 'axios'
+import { FormattedMessage } from 'react-intl';
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -19,7 +20,6 @@ export const Home = () => {
     const [grandeurVelos, setGrandeurVelos] = useState('Tout');
 
     const Ajouter = () => {
-      // Use navigate function to go to the home route
       navigate("/ajout");
     };
 
@@ -118,34 +118,36 @@ export const Home = () => {
 
   return (
     <>
-      <h1>Gestionnaire de vélo</h1>
-      <h3>Prix moyen: {prixMoyen}</h3>
-      <h3>Couleur populaire: {couleurPopulaire}</h3>
+    <FormattedMessage id="app.prixMoyen">{txt => <h3>{txt}{prixMoyen}</h3>}</FormattedMessage>
+    <FormattedMessage id="app.couleurPopulaire">{txt => <h3>{txt}{couleurPopulaire}</h3>}</FormattedMessage>
+
       <Box sx={{ display: "flex", flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '1000px'}}>
-        <button onClick={() => Ajouter()}>Ajouter</button>
+      <FormattedMessage id="app.buttonAjouter">{txt => <button onClick={() => Ajouter()}>{txt}</button>}</FormattedMessage>
+
         <FormControl sx={{ minWidth: 120, margin: '0 10px' }}>
-              <InputLabel>Type</InputLabel>
+          <FormattedMessage id="app.type">{txt => <InputLabel>{txt}</InputLabel>}</FormattedMessage>
               <Select label="Type" name="type" value={typeVelos} onChange={handleInputChangeType}>
-                <MenuItem value={'Route'}>Route</MenuItem>
-                <MenuItem value={'Montagne monté'}>Montagne monté</MenuItem>
-                <MenuItem value={'Montagne descente'}>Montagne descente</MenuItem>
-                <MenuItem value={'Ville'}>Ville</MenuItem>
-                <MenuItem value={'Bmx'}>Bmx</MenuItem>
-                <MenuItem value={'Tout'}>Tout les vélos</MenuItem>
+                <MenuItem value={'Route'}><FormattedMessage id="app.typeRoute"></FormattedMessage></MenuItem>
+                <MenuItem value={'Montagne monté'}><FormattedMessage id="app.typeMontagne monté"></FormattedMessage></MenuItem>
+                <MenuItem value={'Montagne descente'}><FormattedMessage id="app.typeMontagne descente"></FormattedMessage></MenuItem>
+                <MenuItem value={'Ville'}><FormattedMessage id="app.typeVille"></FormattedMessage></MenuItem>
+                <MenuItem value={'Bmx'}><FormattedMessage id="app.typeBmx"></FormattedMessage></MenuItem>
+                <MenuItem value={'Tout'}><FormattedMessage id="app.toutVelos"></FormattedMessage></MenuItem>
               </Select>
         </FormControl>
+
         <FormControl sx={{ minWidth: 120, margin: '0 10px' }}>
-              <InputLabel>Grandeur</InputLabel>
+            <FormattedMessage id="app.grandeur">{txt => <InputLabel>{txt}</InputLabel>}</FormattedMessage>
               <Select label="Grandeur" name="grandeur" value={grandeurVelos} onChange={handleInputChangeGrandeur}>
-                <MenuItem value={'TP'}>TP</MenuItem>
-                <MenuItem value={'P'}>P</MenuItem>
-                <MenuItem value={'M'}>M</MenuItem>
-                <MenuItem value={'L'}>L</MenuItem>
-                <MenuItem value={'TL'}>TL</MenuItem>
-                <MenuItem value={'Tout'}>Tout les vélos</MenuItem>
+                <MenuItem value={'TP'}><FormattedMessage id="app.grandeurTP"></FormattedMessage></MenuItem>
+                <MenuItem value={'P'}><FormattedMessage id="app.grandeurP"></FormattedMessage></MenuItem>
+                <MenuItem value={'M'}><FormattedMessage id="app.grandeurM"></FormattedMessage></MenuItem>
+                <MenuItem value={'L'}><FormattedMessage id="app.grandeurL"></FormattedMessage></MenuItem>
+                <MenuItem value={'TL'}><FormattedMessage id="app.grandeurTL"></FormattedMessage></MenuItem>
+                <MenuItem value={'Tout'}><FormattedMessage id="app.toutVelos"></FormattedMessage></MenuItem>
               </Select>
         </FormControl>
-        <button onClick={() => logout()}>Se déconnecter</button>
+        <FormattedMessage id="app.buttonDeconnection">{txt => <button onClick={() => logout()}>{txt}</button>}</FormattedMessage>
       </Box>
       <Box sx={{ display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '1000px'}}>
         {veloComposants}

@@ -1,3 +1,57 @@
 {
-    "app.titre": "Gestionnaire de vélo"
+    "app.titre": "Gestionnaire de vélo",
+    "app.prixMoyen": "Prix moyen: ",
+    "app.couleurPopulaire": "Couleur populaire: ",
+    "app.buttonAjouter": "Ajouter",
+    "app.buttonDeconnection": "Se déconnecter",
+    "app.buttonLangue": "Changer la langue",
+    "app.confirmationSuppression": "Etes vous certain de vouloir supprimer ce vélo ?",
+    "app.type": "Type",
+    "app.typeRoute": "Route",
+    "app.typeVille": "Ville",
+    "app.typeBmx": "Bmx",
+    "app.typeMontagne monté": "Montagne monté",
+    "app.typeMontagne descente": "Montagne descente",
+
+    "app.grandeur": "Grandeur",
+    "app.grandeurTP": "TP",
+    "app.grandeurP": "P",
+    "app.grandeurM": "M",
+    "app.grandeurL": "L",
+    "app.grandeurTL": "TL",
+
+    "app.toutVelos": "Tout les vélos",
+
+    "velo.buttonModifier": "Modifier",
+    "velo.buttonSupprimer": "Supprimer",
+    "velo.buttonVoirPlus": "Voir plus",
+    "velo.dateFabrication": "Date de fabrication: ",
+    "velo.taille": "taille: ",
+    
+
+    "info.marque": "Marque: ",
+    "info.modele": "Modèle: ",
+    "info.prix": "Prix: ",
+    "info.date": "Date",
+    "info.fonctionnel": "Fonctionnel: ",
+    "info.couleurs": "Couleurs: ",
+    "info.vitesse": "Nombre de vitesse: ",
+    "info.roues": "Roues: ",
+    "info.suspensions": "Suspensions: ",
+    "info.tubeless": "Sans tube: ",
+    "info.psiMin": "Psi min: ",
+    "info.psiMax": "Psi max: ",
+    "info.buttonRetour": "Retour",
+    "info.oui": "oui",
+    "info.non": "non",
+
+    "modifier.titre": "Modifier le vélo",
+    "modifier.buttonSoummettre": "Modifier",
+
+    "ajouter.buttonSoummettre": "Soummettre",
+    "ajouter.info": "Information vélo",
+    "ajouter.roueAvant": "Roue avant",
+    "ajouter.roueArriere": "Roue arrière",
+    "ajouter.suspensionAvant": "Suspension avant",
+    "ajouter.suspensionArriere": "Suspension arrière"
 }
