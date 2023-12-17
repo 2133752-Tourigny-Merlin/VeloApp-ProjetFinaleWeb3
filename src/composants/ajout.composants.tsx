@@ -22,8 +22,8 @@ export const Ajout = () => {
       { marque: '', grandeur: 0, tubeless: false, psiMax: 0 },
     ],
     suspensions: [
-      { type: "", marque: '', psiMin: 0, psiMax: 0, taille: 0 },
-      { type: "", marque: '', psiMin: 0, psiMax: 0, taille: 0 },
+      { type: "Avant", marque: '', psiMin: 0, psiMax: 0, taille: 0 },
+      { type: "Arrière", marque: '', psiMin: 0, psiMax: 0, taille: 0 },
     ],
     fonctionnel: false,
     couleurs: [''],
@@ -34,27 +34,33 @@ export const Ajout = () => {
     const { name, value, type, checked } = e.target;
   
     /*
-    * Code généré par chatGPT
-    */
-    const inputValue = type === 'checkbox' ? checked : type === 'number' ? +value : name === 'couleurs' ? value.split(',').map((color: string) => color.trim()) :  name === 'dateDeCreation' ? new Date(value).toISOString().split('T')[0] : value;
+     * Code généré par chatGPT
+     */
+    const inputValue = type === 'checkbox' ? checked : type === 'number' ? +value : 
+      name === 'couleurs' ? value.split(',').map((color: string) => color.trim()) :  
+      name === 'dateDeCreation' ? new Date(value).toISOString().split('T')[0] : 
+      name === 'fonctionnel' ? Boolean(value) : value === 'true' || value === 'false' ? value === 'true' : value;
     //Fin code emprunté
-
+  
     setVeloInfo({
       ...veloInfo,
       [name]: inputValue,
     });
   };
   
-
   const handleInputChangeRoueEtSuspension = (e: any, index: number, section: string) => {
-    const { name } = e.target;
-
+    const { name, value, type, checked } = e.target;
+    const inputValue = type === 'checkbox' ? checked : type === 'number' ? +value :
+      name === 'tubeless' ? Boolean(value) : value === 'true' || value === 'false' ? value === 'true' : value;
+  
     setVeloInfo((prevInfo) => {
       const nouvelle: any = { ...prevInfo };
-     nouvelle[section][index] = { ...(nouvelle[section][index] as any), [name]: name };
+  
+      nouvelle[section][index] = { ...(nouvelle[section][index]), [name]: inputValue };
       return nouvelle;
     });
   };
+  
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
