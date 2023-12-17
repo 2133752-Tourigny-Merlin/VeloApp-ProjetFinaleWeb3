@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Grid, Typography, TextField, Button } from '@mui/material';
@@ -33,13 +33,13 @@ const Modifier = () => {
       });
   }, [id]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
   
     /*
     * Code généré par chatGPT
     */
-    const formattedValue = name === 'couleurs' ? value.split(',').map((color) => color.trim()) :
+    const formattedValue = name === 'couleurs' ? value.split(',').map((color: string) => color.trim()) :
                            name === 'dateDeCreation' ? new Date(value).toISOString().split('T')[0] :
                            value;
     //Fin du code emprunté
@@ -50,7 +50,7 @@ const Modifier = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     axios.put(`https://master--adorable-panda-985249.netlify.app/velo`, { Velo: veloInfo })
       .then((response) => {

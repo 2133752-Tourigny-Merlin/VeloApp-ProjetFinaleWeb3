@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Grid, Paper, Typography } from '@mui/material';
 import axios from 'axios';
@@ -22,21 +22,21 @@ export const Ajout = () => {
       { marque: '', grandeur: 0, tubeless: false, psiMax: 0 },
     ],
     suspensions: [
-      { type: "Avant", marque: '', psiMin: 0, psiMax: 0, taille: 0 },
-      { type: "Arrière", marque: '', psiMin: 0, psiMax: 0, taille: 0 },
+      { type: "", marque: '', psiMin: 0, psiMax: 0, taille: 0 },
+      { type: "", marque: '', psiMin: 0, psiMax: 0, taille: 0 },
     ],
     fonctionnel: false,
-    couleurs: ['brun'],
+    couleurs: [''],
     nbVitesse: 0,
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value, type, checked } = e.target;
   
     /*
     * Code généré par chatGPT
     */
-    const inputValue = type === 'checkbox' ? checked : type === 'number' ? +value : name === 'couleurs' ? value.split(',').map((color) => color.trim()) :  name === 'dateDeCreation' ? new Date(value).toISOString().split('T')[0] : value;
+    const inputValue = type === 'checkbox' ? checked : type === 'number' ? +value : name === 'couleurs' ? value.split(',').map((color: string) => color.trim()) :  name === 'dateDeCreation' ? new Date(value).toISOString().split('T')[0] : value;
     //Fin code emprunté
 
     setVeloInfo({
@@ -46,28 +46,24 @@ export const Ajout = () => {
   };
   
 
-  const handleInputChangeRoueEtSuspension = (e, index, section) => {
-    const { name, value, type, checked } = e.target;
-    const inputValue = type === 'checkbox' ? checked : type === 'number' ? +value : value;
+  const handleInputChangeRoueEtSuspension = (e: any, index: number, section: string) => {
+    const { name } = e.target;
 
     setVeloInfo((prevInfo) => {
-      const nouvelle = { ...previnfo };
-      nouvelle[section][index] = {
-        ...nouvelle[section][index],
-        [name]: inputValue,
-      };
+      const nouvelle: any = { ...prevInfo };
+     nouvelle[section][index] = { ...(nouvelle[section][index] as any), [name]: name };
       return nouvelle;
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
   
     if(veloInfo.prix <= 0 || veloInfo.nbVitesse <= 0){
       window.alert("Le prix et la grandeurs du vélo doivent être supérieurs à 0");
     } else {
        if (!roueSubmit || !suspensionSubmit) {
-      const ajouter = window.alert("Veillez-vous assurez que vous avez fournis tout les éléments des roues et suspensions");
+       window.alert("Veillez-vous assurez que vous avez fournis tout les éléments des roues et suspensions");
     } else {
       axios
         .post(`https://master--adorable-panda-985249.netlify.app/velo`, { Velo: veloInfo })
@@ -83,7 +79,7 @@ export const Ajout = () => {
    
   };
   
-  const handleSubmitRoue = (e) => {
+  const handleSubmitRoue = (e: any) => {
     e.preventDefault();
     if(veloInfo.roues[0].grandeur <= 0 || veloInfo.roues[1].grandeur <= 0 || veloInfo.roues[0].psiMax <= 0 || veloInfo.roues[1].psiMax <= 0){
       window.alert("Les grandeurs et les psi max doivent être plus grand que 0");
@@ -93,7 +89,7 @@ export const Ajout = () => {
     
   };
 
-  const handleSubmitSuspension = (e) => {
+  const handleSubmitSuspension = (e: any) => {
     e.preventDefault();
     if(veloInfo.suspensions[0].psiMax <= 0 || veloInfo.suspensions[1].psiMax <= 0 || veloInfo.suspensions[0].psiMin <= 0 || veloInfo.suspensions[1].psiMin <= 0 || veloInfo.suspensions[0].taille <= 0 || veloInfo.suspensions[1].taille <= 0){
       window.alert("Les psi max, psi min et la taille max doivent être plus grand que 0");
@@ -111,7 +107,7 @@ export const Ajout = () => {
 
             <FormattedMessage id="info.marque">{txt => <TextField label={txt} name="marque" value={veloInfo.marque} onChange={handleInputChange} required fullWidth />}</FormattedMessage>
             <FormattedMessage id="info.modele">{txt => <TextField label={txt} name="modele" value={veloInfo.modele} onChange={handleInputChange} required fullWidth />}</FormattedMessage>
-            <FormattedMessage id="info.date">{txt => <TextField label="" name="dateDeCreation" type="date" value={veloInfo.dateDeCreation} onChange={handleInputChange} required fullWidth />}</FormattedMessage>
+            <TextField name="dateDeCreation" type="date" value={veloInfo.dateDeCreation} onChange={handleInputChange} required fullWidth />
             <FormattedMessage id="info.prix">{txt => <TextField label={txt} name="prix" type="number" value={veloInfo.prix} onChange={handleInputChange} required fullWidth />}</FormattedMessage>
             <FormControl fullWidth>
             <FormattedMessage id="app.type">{txt => <InputLabel>{txt}</InputLabel>}</FormattedMessage>
@@ -136,8 +132,8 @@ export const Ajout = () => {
             <FormControl fullWidth>
             <FormattedMessage id="info.fonctionnel">{txt => <InputLabel>{txt}</InputLabel>}</FormattedMessage>
               <Select label="Fonctionnel" name="fonctionnel" value={veloInfo.fonctionnel} onChange={handleInputChange} required>
-                <MenuItem value={true}><FormattedMessage id="info.oui"></FormattedMessage></MenuItem>
-                <MenuItem value={false}><FormattedMessage id="info.non"></FormattedMessage></MenuItem>
+                <MenuItem value={'true'}><FormattedMessage id="info.oui"></FormattedMessage></MenuItem>
+                <MenuItem value={'false'}><FormattedMessage id="info.non"></FormattedMessage></MenuItem>
               </Select>
             </FormControl>
             <FormattedMessage id="info.vitesse">{txt => <TextField label={txt} name="nbVitesse" type="number" value={veloInfo.nbVitesse} onChange={handleInputChange} required fullWidth />}</FormattedMessage>
@@ -157,8 +153,8 @@ export const Ajout = () => {
             <FormControl fullWidth>
               <FormattedMessage id="info.tubeless">{txt => <InputLabel>{txt}</InputLabel>}</FormattedMessage>
               <Select label="Tubeless" name="tubeless" value={veloInfo.roues[0].tubeless} onChange={(e) => handleInputChangeRoueEtSuspension(e, 0, 'roues')} required>
-                <MenuItem value={true}><FormattedMessage id="info.oui"></FormattedMessage></MenuItem>
-                <MenuItem value={false}><FormattedMessage id="info.non"></FormattedMessage></MenuItem>
+                <MenuItem value={'true'}><FormattedMessage id="info.oui"></FormattedMessage></MenuItem>
+                <MenuItem value={'false'}><FormattedMessage id="info.non"></FormattedMessage></MenuItem>
               </Select>
             </FormControl>
             <FormattedMessage id="info.psiMax">{txt => <TextField label={txt} name="psiMax" type="number" value={veloInfo.roues[0].psiMax} onChange={(e) => handleInputChangeRoueEtSuspension(e, 0, 'roues')} required fullWidth />}</FormattedMessage>
@@ -170,8 +166,8 @@ export const Ajout = () => {
             <FormControl fullWidth>
               <FormattedMessage id="info.tubeless">{txt => <InputLabel>{txt}</InputLabel>}</FormattedMessage>
               <Select label="Tubeless" name="tubeless" value={veloInfo.roues[1].tubeless} onChange={(e) => handleInputChangeRoueEtSuspension(e, 1, 'roues')} required>
-                <MenuItem value={true}><FormattedMessage id="info.oui"></FormattedMessage></MenuItem>
-                <MenuItem value={false}><FormattedMessage id="info.non"></FormattedMessage></MenuItem>
+                <MenuItem value={'true'}><FormattedMessage id="info.oui"></FormattedMessage></MenuItem>
+                <MenuItem value={'false'}><FormattedMessage id="info.non"></FormattedMessage></MenuItem>
               </Select>
             </FormControl>
             <FormattedMessage id="info.psiMax">{txt => <TextField label={txt} name="psiMax" type="number" value={veloInfo.roues[1].psiMax} onChange={(e) => handleInputChangeRoueEtSuspension(e, 1, 'roues')} required fullWidth />}</FormattedMessage>

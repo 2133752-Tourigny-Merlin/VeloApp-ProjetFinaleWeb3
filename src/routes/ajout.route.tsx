@@ -1,4 +1,4 @@
-import { Ajout } from '../composants/ajout.composants';
+import Ajout from '../composants/ajout.composants';
 import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';

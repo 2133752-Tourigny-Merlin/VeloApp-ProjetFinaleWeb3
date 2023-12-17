@@ -1,16 +1,29 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import Velo from './VeloCarte.composants'
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
 import './style.css'
-import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Grid, Paper, Typography, Box } from '@mui/material';
+import { Select, MenuItem, FormControl, InputLabel,Box } from '@mui/material';
 import { logout } from '../firebase';
 import axios from 'axios'
 import { FormattedMessage } from 'react-intl';
 
 export const Home = () => {
+  type Velo = {
+    _id: '',
+    marque: '',
+    modele: '',
+    dateDeCreation: '',
+    prix: 0,
+    type: '',
+    taille: '',
+    roues: [],
+    suspensions: [],
+    fonctionnel: true,
+    couleurs: [],
+    nbVitesse: 0,
+  };
+
     const navigate = useNavigate();
     const [velos, setVelos] = useState<Velo[]>([]);
     const [couleurPopulaire, setCouleurPopulaire] = useState('');
@@ -22,8 +35,6 @@ export const Home = () => {
     const Ajouter = () => {
       navigate("/ajout");
     };
-
-    const typeVelo = ["Route", "Montagne monté", "Montagne descente", "Ville", "Bmx"]
 
     useEffect(() => {
       axios.get('https://master--adorable-panda-985249.netlify.app/velo')
@@ -53,7 +64,7 @@ export const Home = () => {
       });
     }, []);
 
-    const handleInputChangeType = (e) => {
+    const handleInputChangeType = (e: { target: { value: any; }; }) => {
       const { value } = e.target;
       setTypeVelos(value);
       setGrandeurVelos("Tout");
@@ -79,7 +90,7 @@ export const Home = () => {
       }
     };
 
-    const handleInputChangeGrandeur = (e) => {
+    const handleInputChangeGrandeur = (e: { target: { value: any; }; }) => {
       const { value } = e.target;
       setGrandeurVelos(value);
       setTypeVelos("Tout");

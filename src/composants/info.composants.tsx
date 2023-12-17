@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Typography, Grid, Paper } from '@mui/material';
+import { Typography, Grid, Paper } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
@@ -9,20 +9,25 @@ export const Info = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [veloInfo, setVeloInfo] = useState({
-      _id: id,
+      id: '',
       marque: '',
       modele: '',
       dateDeCreation: '',
       prix: 0,
       type: '',
       taille: '',
-      roues: [],
-      suspensions: [],
-      fonctionnel: true,
+      roues: [
+        { marque: '', grandeur: 0, tubeless: false, psiMax: 0 },
+        { marque: '', grandeur: 0, tubeless: false, psiMax: 0 },
+      ],
+      suspensions: [
+        { type: "", marque: '', psiMin: 0, psiMax: 0, taille: 0 },
+        { type: "", marque: '', psiMin: 0, psiMax: 0, taille: 0 },
+      ],
+      fonctionnel: false,
       couleurs: [],
       nbVitesse: 0,
     });
-  
     useEffect(() => {
       axios.get(`https://master--adorable-panda-985249.netlify.app/velo/${id}`)
         .then((response) => {

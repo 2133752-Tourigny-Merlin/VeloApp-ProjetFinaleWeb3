@@ -1,6 +1,4 @@
-import React from 'react';
 import { Card, CardMedia, Grid, Typography } from '@mui/material';
-import { grey } from '@mui/material/colors';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -8,13 +6,11 @@ import { FormattedMessage } from 'react-intl';
 interface IVelo {
   modele: string;
   marque: string;
-  annee: number;
+  annee: string;
   taille: string;
   type: string;
   _id: string;
 }
-
-const typeVelo = ["Route", "Montagne monté", "Montagne descente", "Ville", "Bmx"];
 
 const getImageByType = (type: string): string => {
   switch (type) {
