@@ -30,17 +30,16 @@ export const Ajout = () => {
     nbVitesse: 0,
   });
 
+  // Gestion des transformations de valeurs des inputs
+  // Code emprunté. Source : https://chat.openai.com
   const handleInputChange = (e: any) => {
     const { name, value, type, checked } = e.target;
-  
-    /*
-     * Code généré par chatGPT
-     */
+
     const inputValue = type === 'checkbox' ? checked : type === 'number' ? +value : 
       name === 'couleurs' ? value.split(',').map((color: string) => color.trim()) :  
       name === 'dateDeCreation' ? new Date(value).toISOString().split('T')[0] : 
       name === 'fonctionnel' ? Boolean(value) : value === 'true' || value === 'false' ? value === 'true' : value;
-    //Fin code emprunté
+
   
     setVeloInfo({
       ...veloInfo,
@@ -48,10 +47,9 @@ export const Ajout = () => {
     });
   };
   
-  // Gestion des transformations de valeurs des inputs
-  // Code emprunté. Source : https://chat.openai.com
   const handleInputChangeRoueEtSuspension = (e: any, index: number, section: string) => {
     const { name, value, type, checked } = e.target;
+    
     const inputValue = type === 'checkbox' ? checked : type === 'number' ? +value :
       name === 'tubeless' ? Boolean(value) : value === 'true' || value === 'false' ? value === 'true' : value;
   
