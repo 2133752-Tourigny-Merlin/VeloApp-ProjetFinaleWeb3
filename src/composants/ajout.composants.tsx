@@ -48,6 +48,8 @@ export const Ajout = () => {
     });
   };
   
+  // Gestion des transformations de valeurs des inputs
+  // Code emprunté. Source : https://chat.openai.com
   const handleInputChangeRoueEtSuspension = (e: any, index: number, section: string) => {
     const { name, value, type, checked } = e.target;
     const inputValue = type === 'checkbox' ? checked : type === 'number' ? +value :
@@ -60,6 +62,7 @@ export const Ajout = () => {
       return nouvelle;
     });
   };
+  // Fin code emprunté
   
 
   const handleSubmit = (e: any) => {

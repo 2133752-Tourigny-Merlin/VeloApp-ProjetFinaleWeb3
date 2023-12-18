@@ -33,12 +33,11 @@ const Modifier = () => {
       });
   }, [id]);
 
+  //Gestion des transformations de valeurs des inputs
+  // Code emprunté. Source : https://chat.openai.com
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
   
-    /*
-    * Code généré par chatGPT
-    */
     const formattedValue = name === 'couleurs' ? value.split(',').map((color: string) => color.trim()) :
                            name === 'dateDeCreation' ? new Date(value).toISOString().split('T')[0] :
                            value;
@@ -49,6 +48,7 @@ const Modifier = () => {
       [name]: formattedValue,
     }));
   };
+  // Fin code emprunté
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
